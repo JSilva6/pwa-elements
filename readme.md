@@ -1,3 +1,10 @@
+# Warning: Edited repo!
+
+This repo was changed so could fit some personal needs. Added the `errorHandler` and `allowGallery` options for the camera entry module. For further documentation, info, updates and issues, check the [original repo](https://github.com/ionic-team/ionic-pwa-elements)
+
+`errorHandler`: listener function that will trigger whenever `takePhoto()` or `getCameraCapabilites()` fail, resulting on a freeze state of the camera.
+`allowGallery`: boolean (default `true`), when `false` will hide the gallery input buttons when the camera isn't avaliable or hide the button at left of the shutter camera button.
+
 # Ionic Elements for Progressive Web Apps
 
 This project is a growing collection of pre-built UI experiences for Web APIs such
@@ -16,7 +23,7 @@ Currently, the project offers a quality in-app Camera experience using
 `getUserMedia`, with support for multiple cameras and with automatic handling
 of image data.
 
-See [the provided example](https://github.com/ionic-team/ionic-pwa-elements/blob/master/src/index.html)
+See [the provided example](https://github.com/JSilva6/ionic-pwa-elements/blob/master/src/index.html)
 for an example of how to use these components.
 
 ## Capacitor Usage
