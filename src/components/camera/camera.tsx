@@ -24,6 +24,7 @@ export class CameraPWA {
   @Prop() handleError: (e?: any) => void;
   @Prop() noDevicesText = 'No camera found';
   @Prop() noDevicesButtonText = 'Choose image';
+  @Prop() allowGallery = true
 
   @State() photo: any;
   @State() photoSrc: any;
@@ -139,18 +140,23 @@ export class CameraPWA {
   }
 
   async initPhotoCapabilities(imageCapture: any) {
-    const c = await imageCapture.getPhotoCapabilities();
+    try{
+      const c = await imageCapture.getPhotoCapabilities();
 
-    if (c.fillLightMode && c.fillLightMode.length > 1) {
-      this.flashModes = c.fillLightMode.map(m => m);
+      if (c.fillLightMode && c.fillLightMode.length > 1) {
+        this.flashModes = c.fillLightMode.map(m => m);
 
-      // Try to recall the current flash mode
-      if (this.flashMode) {
-        this.flashMode = this.flashModes[this.flashModes.indexOf(this.flashMode)] || 'off';
-        this.flashIndex = this.flashModes.indexOf(this.flashMode) || 0;
-      } else {
-        this.flashIndex = 0;
+        // Try to recall the current flash mode
+        if (this.flashMode) {
+          this.flashMode = this.flashModes[this.flashModes.indexOf(this.flashMode)] || 'off';
+          this.flashIndex = this.flashModes.indexOf(this.flashMode) || 0;
+        } else {
+          this.flashIndex = 0;
+        }
       }
+    } catch (e) {
+      this.handleError && this.handleError(e)
+      console.error('Unable to init capabilities!', e);
     }
   }
 
@@ -434,12 +440,14 @@ export class CameraPWA {
             <label htmlFor="_pwa-elements-camera-input">
               {this.noDevicesButtonText}
             </label>
+            {this.allowGallery && (
             <input
               type="file"
               id="_pwa-elements-camera-input"
               onChange={this.handleFileInputChange}
               accept="image/*"
               class="select-file-button" />
+            )}
           </div>
         )}
         {/* Show the taken photo for the Accept UI*/}
@@ -473,7 +481,7 @@ export class CameraPWA {
 
         {this.hasCamera && (
         <div class="camera-footer">
-          {!this.photo ? ([
+          {!this.photo ? ([ this.allowGallery ?
           <div class="pick-image" onClick={this.handlePickFile}>
             <label htmlFor="_pwa-elements-file-pick">
               {this.iconPhotos()}
@@ -484,7 +492,7 @@ export class CameraPWA {
               onChange={this.handleFileInputChange}
               accept="image/*"
               class="pick-image-button" />
-          </div>,
+          </div> : <div></div>,
           <div class="shutter" onClick={this.handleShutterClick}>
             <div class="shutter-button"></div>
           </div>,

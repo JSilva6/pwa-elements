@@ -18,10 +18,11 @@ export namespace Components {
     'options': ActionSheetOption[];
   }
   interface PwaCamera {
+    'allowGallery': boolean;
     'facingMode': string;
+    'handleError': (e?: any) => void;
     'handleNoDeviceError': (e?: any) => void;
     'handlePhoto': (photo: Blob) => void;
-    'handleError': (e?: any) => void;
     'noDevicesButtonText': string;
     'noDevicesText': string;
   }
@@ -90,7 +91,9 @@ declare namespace LocalJSX {
     'options'?: ActionSheetOption[];
   }
   interface PwaCamera {
+    'allowGallery'?: boolean;
     'facingMode'?: string;
+    'handleError'?: (e?: any) => void;
     'handleNoDeviceError'?: (e?: any) => void;
     'handlePhoto'?: (photo: Blob) => void;
     'noDevicesButtonText'?: string;
