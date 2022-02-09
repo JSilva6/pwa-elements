@@ -1,7 +1,7 @@
 {
-  "name": "@ionic/pwa-elements",
-  "version": "3.1.1",
-  "description": "Stencil Component Starter",
+  "name": "ionic-pwa-elements-with-handlers",
+  "version": "3.1.1-beta",
+  "description": "Stencil Component Starter - With hotfixes by Jalax",
   "main": "dist/index.js",
   "unpkg": "dist/ionicpwaelements/ionicpwaelements.js",
   "types": "dist/types/index.d.ts",
@@ -19,14 +19,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ionic-team/ionic-pwa-elements.git"
+    "url": "git+https://github.com/JSilva6/ionic-pwa-elements.git"
   },
   "author": "Ionic Team",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ionic-team/ionic-pwa-elements"
+    "url": "https://github.com/JSilva6/ionic-pwa-elements"
   },
-  "homepage": "https://github.com/ionic-team/ionic-pwa-elements",
+  "homepage": "https://github.com/JSilva6/ionic-pwa-elements",
   "devDependencies": {
     "@stencil/core": "^1.8.11",
     "np": "^6.5.0",
