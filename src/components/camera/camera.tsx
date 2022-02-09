@@ -21,6 +21,7 @@ export class CameraPWA {
 
   @Prop() handlePhoto: (photo: Blob) => void;
   @Prop() handleNoDeviceError: (e?: any) => void;
+  @Prop() handleError: (e?: any) => void;
   @Prop() noDevicesText = 'No camera found';
   @Prop() noDevicesButtonText = 'Choose image';
 
@@ -56,6 +57,9 @@ export class CameraPWA {
   flashModes: FlashMode[] = [];
   // Current flash mode
   flashMode: FlashMode = 'off';
+
+  // Check for current processing
+  isProcessing = true;
 
   async componentDidLoad() {
     if (this.isServer) {
@@ -158,20 +162,25 @@ export class CameraPWA {
   }
 
   async capture() {
-    if (this.hasImageCapture()) {
+    if (this.hasImageCapture() && !this.isProcessing) {
+      this.isProcessing = true
+
       try {
         const photo = await this.imageCapture.takePhoto({
           fillLightMode: this.flashModes.length > 1 ? this.flashMode : undefined
         });
-        
+
         await this.flashScreen();
 
         this.promptAccept(photo);
       } catch (e) {
+        this.handleError && this.handleError(e)
         console.error('Unable to take photo!', e);
       }
     }
+
     this.stopStream();
+    this.isProcessing = false;
   }
 
   async promptAccept(photo: any) {
@@ -203,7 +212,7 @@ export class CameraPWA {
           break;
       }
     }
-    
+
     this.photoSrc = URL.createObjectURL(photo);
   }
 

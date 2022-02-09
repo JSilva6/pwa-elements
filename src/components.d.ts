@@ -21,6 +21,7 @@ export namespace Components {
     'facingMode': string;
     'handleNoDeviceError': (e?: any) => void;
     'handlePhoto': (photo: Blob) => void;
+    'handleError': (e?: any) => void;
     'noDevicesButtonText': string;
     'noDevicesText': string;
   }
